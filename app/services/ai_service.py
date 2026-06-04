@@ -19,12 +19,11 @@ async def generate_ai_response(message: str) -> str:
         "Content-Type": "application/json",
     }
 
-    async with httpx.AsyncClient(timeout=120) as client:
+    async with httpx.AsyncClient(timeout=300) as client:
         response = await client.post(url, json=payload, headers=headers)
 
     data = response.json()
-    print(data)
 
     response.raise_for_status()
 
-    return data["choices"][0]["message"]["content"]
+    return data
